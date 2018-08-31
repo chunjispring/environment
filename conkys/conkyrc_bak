@@ -1,0 +1,138 @@
+# — Conky settings — #
+background yes
+
+update_interval 1
+total_run_times 0
+net_avg_samples 2
+
+override_utf8_locale yes
+
+double_buffer yes
+no_buffers yes
+
+text_buffer_size 2048
+imlib_cache_size 0
+
+temperature_unit celsius
+
+# — Window specifications — #
+own_window_argb_visual yes
+own_window_argb_value 255
+own_window_class Conky
+own_window yes
+#own_window_type conky
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+border_inner_margin 0
+border_outer_margin 0
+
+minimum_size 300 300
+maximum_width 3000
+
+alignment top_right
+#alignment top_left
+#alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+#alignment none
+
+#gap_x 30
+#gap_y 75
+gap_x 5
+gap_y 55
+
+# — Graphics settings — #
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# — Text settings — #
+use_xft yes
+xftfont Bauhaus ITC:size=7
+xftalpha 0.5
+
+default_color FFFFFF
+
+uppercase no
+use_spacer right
+
+color0 white
+color1 orange
+color2 green
+
+# — Lua Load — #
+lua_load MYCONKY/scripts/multi_rings.lua
+lua_draw_hook_post main
+
+TEXT
+${voffset 29}${offset 120}BAT:
+${voffset 17}${goto 65}${font hooge 05_53:size=12}${time %H:%M}${font}${goto 145}HD${goto 185}UPTIME:
+${voffset 2}${goto 65}${time %a %d %b}${goto 185}${uptime}
+#${voffset 2}${goto 65}${time %Y}
+${voffset 5}${alignc}${fs_free}/${fs_size}
+${voffset 20}${goto 76}CPU${goto 205}MEM
+${voffset 35}${goto 76}${cpu cpu0}%${goto 205}${memperc}%
+#${image MYCONKY/conkys/logo.png -p 50,180 -s 200x100}
+${color white}${font Courier New:size=12}             User
+${color purple}${font Courier New:size=12}            ${exec whoami}
+
+
+
+####摘要信息
+${color green}${font Sans:size=12}摘要信息 ${hr 1}${color}
+#内核
+${color white}${font Courier New:size=10}System   Kernel: ${font Courier New:size=10}${alignr}$kernel
+#本地IP地址
+${color white}${font Courier New:size=10}IP      Address: ${font Courier New:size=10}${alignr}${addr MYNET}
+#运行时间
+${color white}${font Courier New:size=10}Run        Time: ${font Courier New:size=10}${alignr}$uptime
+#Cpu频率
+${color white}${font Courier New:size=10}Cpu   Frequency: ${font Courier New:size=10}${alignr}${freq} MHz
+#cpu温度
+${color white}${font Courier New:size=10}Cpu Temperature: ${font Courier New:size=10}${alignr}${acpitemp}°C
+#系统名
+${color white}${font Courier New:size=10}Computer   Name: ${font Courier New:size=10}${alignr}$nodename
+#进程数
+#${color white}${font Courier New:size=10}Processes   Num: ${color red}$processes ${color} ${alignr}${font Courier New:size=10}${color red}$running_processes ${color}Running
+${color white}${font Courier New:size=10}Processes   Num: ${color red}$processes ${alignr}$running_processes${color}Running
+#系统信息
+${color green}${font Sans:size=12}系统信息 ${hr 1}${color}
+#内存使用
+#${color lightblue}${font :bold:size=10}[MEMORY] $font:$color ${alignr}$mem/$memmax - $memperc%
+${color white}${font Courier New:size=10}MEM        Used: ${font Courier New:size=8}${alignr}$mem/$memmax - $memperc%
+${color grey}${font Courier New:size=4}${membar}
+#Swap使用条 ($swapperc%)
+${color white}${font Courier New:size=10}SWAP       Used: ${font Courier New:size=8}${alignr}$swap/$swapmax - $swapperc%
+${color grey}${font Courier New:size=4}${swapbar}
+#/home使用
+#${color lightblue}${font :bold:size=10}[   HOME   ] $font:$color  ${alignr}${fs_used /home}/${fs_size /home} - ${fs_used_perc /home}%
+${color white}${font Courier New:size=10}HOME       Used: ${font Courier New:size=8}${alignr}${fs_used /home}/${fs_size /home} - ${fs_used_perc /home}%
+${color grey}${font Courier New:size=4}${fs_bar /home}
+#CPU使用率
+${color #F3AB2E}${font Courier New:size=10}C${color #C02E1D}p${color #F3AB2E}u${color white}-1 ${font Courier New:size=8}${color white}${alignr}${cpu cpu1}%      ${color #dcff82} ${cpubar cpu1 4,135}
+${color #F3AB2E}${font Courier New:size=10}C${color #C02E1D}p${color #F3AB2E}u${color white}-2 ${font Courier New:size=8}${color white}${alignr}${cpu cpu2}%      ${color #88aadd} ${cpubar cpu2 4,135}
+#CPU 内存 TOP3
+${color #F3AB2E}${font Courier New:size=10}High Cpu ${font Courier New:size=10}$alignr Cpu% ${font Courier New:size=10} Mem% ${color #69E30B}
+${font Courier New:size=9}${top name 1}$alignr${top cpu 1}${top mem 1}
+${font Courier New:size=9}${top name 2}$alignr${top cpu 2}${top mem 2}
+${font Courier New:size=9}${top name 3}$alignr${top cpu 3}${top mem 3}
+${color #F3AB2E}${font Courier New:size=10}High Mem ${font Courier New:size=10}$alignr Cpu% ${font Courier New:size=10} Mem% ${color #69E30B}
+${font Courier New:size=9}${top_mem name 1}$alignr${top_mem cpu 1}${top_mem mem 1}
+${font Courier New:size=9}${top_mem name 2}$alignr${top_mem cpu 2}${top_mem mem 2}
+${font Courier New:size=9}${top_mem name 3}$alignr${top_mem cpu 3}${top_mem mem 3}
+####网络使用
+${color green}${font Sans:size=12}网络信息 ${hr 1}${color}
+${font Courier New:size=10}Upload    Speed: $alignr${upspeed MYNET}/s
+${font Courier New:size=10}Download  Speed: $alignr${downspeed MYNET}/s
+####磁盘读写
+#${color green}${font Sans:size=12}磁盘读写 ${hr 1}${color}
+#${font Courier New:size=10}Diskio        R: ${font Courier New:size=10}${diskiograph_read /dev/sda 14,80 000000 758fff}${alignr}${diskio_read}
+#${font Courier New:size=10}Diskio        W: ${font Courier New:size=10}${diskiograph_write /dev/sda 14,80 000000 758fff}${alignr}${diskio_write}
+
+${if_match ${battery_percent BAT0}>0}${if_match ${battery_percent BAT0}<=15}${image MYCONKY/images/Red.png -p 129,18 -s 40x40}${endif}${endif}
+${if_match ${battery_percent BAT0}>15}${if_match ${battery_percent BAT0}<=20}${image MYCONKY/images/Orange.png -p 129,18 -s 40x40}${endif}${endif}
+${if_match ${battery_percent BAT0}>20}${if_match ${battery_percent BAT0}<=35}${image MYCONKY/images/Yellow.png -p 129,18 -s 40x40}${endif}${endif}
+${if_match ${battery_percent BAT0}>35}${if_match ${battery_percent BAT0}<=100}${image MYCONKY/images/Dark_Green.png -p 129,18 -s 40x40}${endif}${endif}
+${execpi 1 cat MYCONKY/scripts/blinkingLED}

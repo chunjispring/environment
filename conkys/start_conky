@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#环境变量
+CFGHOME=${HOME}/.conky
+CFGBAK=${CFGHOME}/conkyrc_bak
+CFGFILE=${CFGHOME}/conkyrc
+NET=`/sbin/ip addr |grep -w inet|awk '/dynamic/{print $8}'`
+if [ x${NET} == x ]
+then
+    NET=`/sbin/ip addr |grep -w inet|awk '/global/{print $7}'`
+fi
+
+#MYNET 替换为 真实网卡
+cp ${CFGBAK} ${CFGFILE}
+
+mod="s@MYNET@$NET@g"
+find ${CFGHOME} -name "conkyrc" -exec sed -i ${mod} {} \;
+
+sleep 5
+
+num=`ps -ef|grep -v grep |grep conky |wc -l`
+#echo "num is $num"
+
+if [ $num -ge 2 ]; then
+    #echo "execute...."
+    killall conky >/dev/null 2>&1
+    conky -c ${CFGHOME}/conkyrc >/dev/null 2>&1 &
+fi
+
+#开机启动的话用 gnome-session-properties 命令，然后在出来的管理器中加入就行了
+#没有 gnome-session-properties 命令的话，在家目录 .config/autostart目录下放入desktop文件也可开机启动
+
