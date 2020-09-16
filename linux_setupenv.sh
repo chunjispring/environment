@@ -14,13 +14,13 @@ mod="s@MYCONKY@$CONKYHOME@g"
 
 #更新系统 安装常用软件
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y conky-all cowsay fortune fortune-zh sl nmon htop openssh-server zsh valgrind locate screenfetch curl cppcheck
+sudo apt install -y conky-all cowsay fortune-mod fortunes-zh sl nmon htop openssh-server zsh valgrind locate screenfetch curl cppcheck
 
 #改变默认shell为zsh
 chsh -s `which zsh`
 
 #安装oh_my_zsh
-wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+wget https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh -O - | sh
 
 #备份系统配置
 cp -p ${HOME}/.bashrc ${HOME}/.bashrc_wcj
